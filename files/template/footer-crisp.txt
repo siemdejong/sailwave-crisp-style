@@ -1,81 +1,81 @@
 </div><!-- end of swout: raw Sailwave output -->
 
-<div id="zsn-panels" class="zsn-panels">
+<div id="crisp-panels" class="crisp-panels">
 
-  <section id="p-overall" class="zsn-panel" data-panel="overall"></section>
+  <section id="p-overall" class="crisp-panel" data-panel="overall"></section>
 
-  <section id="p-races" class="zsn-panel" data-panel="races" hidden></section>
+  <section id="p-races" class="crisp-panel" data-panel="races" hidden></section>
 
-  <section id="p-info" class="zsn-panel" data-panel="info" hidden>
-    <div class="zsn-card">
+  <section id="p-info" class="crisp-panel" data-panel="info" hidden>
+    <div class="crisp-card">
       <h2>Event info</h2>
-      <table class="zsn-kv">
+      <table class="crisp-kv">
         <tr><th>Event</th><td>`event.name`</td></tr>
         <tr><th>Venue</th><td>`venue.name`</td></tr>
-        <tr><th>Races completed</th><td id="zsn-i-races">-</td></tr>
-        <tr><th>Entries</th><td id="zsn-i-entries">-</td></tr>
-        <tr><th>Discarded races</th><td id="zsn-i-discards">-</td></tr>
-        <tr id="zsn-i-caption-row" hidden><th>Series summary</th><td id="zsn-i-caption"></td></tr>
+        <tr><th>Races completed</th><td id="crisp-i-races">-</td></tr>
+        <tr><th>Entries</th><td id="crisp-i-entries">-</td></tr>
+        <tr><th>Discarded races</th><td id="crisp-i-discards">-</td></tr>
+        <tr id="crisp-i-caption-row" hidden><th>Series summary</th><td id="crisp-i-caption"></td></tr>
       </table>
     </div>
-    <div id="zsn-info-extra"></div>
+    <div id="crisp-info-extra"></div>
   </section>
 
-  <section id="p-settings" class="zsn-panel" data-panel="settings" hidden>
-    <div class="zsn-card">
+  <section id="p-settings" class="crisp-panel" data-panel="settings" hidden>
+    <div class="crisp-card">
       <h2>Display settings</h2>
-      <div class="zsn-set"><label for="s-theme">Theme</label>
+      <div class="crisp-set"><label for="s-theme">Theme</label>
         <select id="s-theme" data-set="theme">
           <option value="light">Light</option>
           <option value="dark">Dark</option>
           <option value="contrast">High contrast</option>
         </select></div>
-      <div class="zsn-set"><label for="s-density">Row spacing</label>
+      <div class="crisp-set"><label for="s-density">Row spacing</label>
         <select id="s-density" data-set="density">
           <option value="comfortable">Comfortable</option>
           <option value="compact">Compact</option>
         </select></div>
-      <div class="zsn-set"><label for="s-size">Text size</label>
+      <div class="crisp-set"><label for="s-size">Text size</label>
         <select id="s-size" data-set="size">
           <option value="normal">Normal</option>
           <option value="large">Large (big screen)</option>
         </select></div>
-      <div class="zsn-set"><label for="s-races">Show race columns</label>
+      <div class="crisp-set"><label for="s-races">Show race columns</label>
         <input id="s-races" type="checkbox" data-set="races"></div>
-      <div class="zsn-set"><label for="s-medals">Gold / silver / bronze rank badges</label>
+      <div class="crisp-set"><label for="s-medals">Gold / silver / bronze rank badges</label>
         <input id="s-medals" type="checkbox" data-set="medals"></div>
-      <div class="zsn-set"><label for="s-top3">Colour top 3 finishers in each race</label>
+      <div class="crisp-set"><label for="s-top3">Colour top 3 finishers in each race</label>
         <input id="s-top3" type="checkbox" data-set="top3"></div>
-      <div class="zsn-set"><label for="s-discards">Grey out discarded races</label>
+      <div class="crisp-set"><label for="s-discards">Grey out discarded races</label>
         <input id="s-discards" type="checkbox" data-set="discards"></div>
-      <div class="zsn-set"><label for="s-zebra">Striped rows</label>
+      <div class="crisp-set"><label for="s-zebra">Striped rows</label>
         <input id="s-zebra" type="checkbox" data-set="zebra"></div>
-      <div class="zsn-set"><label for="s-helm">Show helm column</label>
+      <div class="crisp-set"><label for="s-helm">Show helm column</label>
         <input id="s-helm" type="checkbox" data-set="helm"></div>
-      <div class="zsn-set"><label for="s-sail">Show sail number column</label>
+      <div class="crisp-set"><label for="s-sail">Show sail number column</label>
         <input id="s-sail" type="checkbox" data-set="sail"></div>
-      <div class="zsn-set"><label for="s-extra">Show extra columns (club, class, fleet ...)</label>
+      <div class="crisp-set"><label for="s-extra">Show extra columns (club, class, fleet ...)</label>
         <input id="s-extra" type="checkbox" data-set="extra"></div>
-      <div class="zsn-set zsn-set-last">
-        <span class="zsn-muted">Settings are remembered in this browser only.</span>
-        <button type="button" id="zsn-reset" class="zsn-btn">Reset to defaults</button></div>
+      <div class="crisp-set crisp-set-last">
+        <span class="crisp-muted">Settings are remembered in this browser only.</span>
+        <button type="button" id="crisp-reset" class="crisp-btn">Reset to defaults</button></div>
     </div>
   </section>
 
 </div>
 
-<div class="zsn-foot">
-  <p class="zsn-foot-links">
+<div class="crisp-foot">
+  <p class="crisp-foot-links">
     <a href="http://`venue.web`">`venue.web`</a>
     <a href="mailto:`venue.email`">`venue.email`</a>
     <a href="http://`event.web`">`event.web`</a>
     <a href="mailto:`event.email`">`event.email`</a>
   </p>
-  <p class="zsn-foot-main">
+  <p class="crisp-foot-main">
     <span>`event.name`</span>
-    <span id="zsn-generated"></span>
+    <span id="crisp-generated"></span>
   </p>
-  <p class="zsn-foot-sw">Sailwave Scoring Software `version`<br><a href="http://www.sailwave.com">www.sailwave.com</a></p>
+  <p class="crisp-foot-sw">Sailwave Scoring Software `version`<br><a href="http://www.sailwave.com">www.sailwave.com</a></p>
 </div>
 
 </div><!-- end of wrap -->
@@ -86,7 +86,7 @@
 (function () {
   "use strict";
 
-  var KEY = "zsn-sailwave-settings";
+  var KEY = "crisp-sailwave-settings";
   var DEFAULTS = {
     theme: "light", density: "compact", size: "normal",
     races: true, medals: true, top3: true, discards: false, zebra: true,
@@ -142,7 +142,7 @@
         applySettings();
       });
     });
-    var reset = $("zsn-reset");
+    var reset = $("crisp-reset");
     if (reset) {
       reset.addEventListener("click", function () {
         for (var k in DEFAULTS) { if (DEFAULTS.hasOwnProperty(k)) { settings[k] = DEFAULTS[k]; } }
@@ -177,7 +177,7 @@
     each(headerCells(table), function (h) { heads.push(txt(h).toLowerCase()); });
     var hasRace = table.querySelector("col.race") !== null ||
                   heads.some(function (h) { return /^(r|race|wedstrijd)\s?\d+$/.test(h); });
-    var hasTot = table.querySelector("th.zsn-total, th.zsn-nett") !== null ||
+    var hasTot = table.querySelector("th.crisp-total, th.crisp-nett") !== null ||
                  heads.some(function (h) { return /^(total|totaal|nett?|netto)$/.test(h); });
     if (hasRace && hasTot) { return "summary"; }
     if (heads.indexOf("place") > -1) { return "race"; }
@@ -189,10 +189,10 @@
     var cols = table.querySelectorAll("col");
     var kinds = [], raceIdx = [], raceHeads = [], i, n = 0;
 
-    /* The template tags known fields with zsn-* classes (class.set in ZSN-Results.htm).
+    /* The template tags known fields with crisp-* classes (class.set in crisp-Results.htm).
        Those follow the Sailwave FIELD name, so they survive a renamed column title. */
-    var CLASS_KINDS = { "zsn-rank": "rank", "zsn-boat": "boat", "zsn-sail": "sail",
-                        "zsn-helm": "helm", "zsn-total": "total", "zsn-nett": "nett" };
+    var CLASS_KINDS = { "crisp-rank": "rank", "crisp-boat": "boat", "crisp-sail": "sail",
+                        "crisp-helm": "helm", "crisp-total": "total", "crisp-nett": "nett" };
     function kindFromClass(node) {
       for (var cls in CLASS_KINDS) {
         if (CLASS_KINDS.hasOwnProperty(cls) && node && node.classList.contains(cls)) { return CLASS_KINDS[cls]; }
@@ -288,9 +288,9 @@
   function podiumStrip(a) {
     var top = a.rows.filter(function (r) { return r.rank >= 1 && r.rank <= 3; }).slice(0, 3);
     if (!top.length) { return null; }
-    var wrap = make("div", "zsn-podium");
+    var wrap = make("div", "crisp-podium");
     top.forEach(function (r) {
-      var card = make("div", "zsn-pod p" + r.rank);
+      var card = make("div", "crisp-pod p" + r.rank);
       card.appendChild(make("span", "pos", String(r.rank)));
       var who = make("div", "who");
       who.appendChild(make("strong", null, r.label));
@@ -304,10 +304,10 @@
   }
 
   function raceCard(a, title) {
-    var card = make("section", "zsn-card");
+    var card = make("section", "crisp-card");
     card.appendChild(make("h2", null, title));
-    var scroll = make("div", "zsn-scroll");
-    var t = make("table", "zsn-racegrid");
+    var scroll = make("div", "crisp-scroll");
+    var t = make("table", "crisp-racegrid");
     var thead = make("thead"), hr = make("tr");
     ["Race", "Winner", "2nd / 3rd"].forEach(function (h) { hr.appendChild(make("th", null, h)); });
     thead.appendChild(hr);
@@ -361,10 +361,10 @@
           var last = txt(pending[pending.length - 1]);
           if (last && last.length < 80) { a.title = last; }
         }
-        var holder = make("div", "zsn-scroll");
+        var holder = make("div", "crisp-scroll");
         tbl.parentNode.insertBefore(holder, tbl);
         holder.appendChild(tbl);
-        tbl.classList.add("zsn-table");
+        tbl.classList.add("crisp-table");
         var pod = podiumStrip(a);
         var nodeOut = (node === tbl) ? holder : node;
         overall = overall.concat(pending);
@@ -403,19 +403,19 @@
         if (cap) { caption = txt(cap); }
       }
     });
-    $("zsn-i-races").textContent = sailed + " / " + scheduled;
-    $("zsn-i-entries").textContent = String(entries);
-    $("zsn-i-discards").textContent = String(discards);
+    $("crisp-i-races").textContent = sailed + " / " + scheduled;
+    $("crisp-i-entries").textContent = String(entries);
+    $("crisp-i-discards").textContent = String(discards);
     if (caption) {
-      $("zsn-i-caption").textContent = caption;
-      $("zsn-i-caption-row").hidden = false;
+      $("crisp-i-caption").textContent = caption;
+      $("crisp-i-caption-row").hidden = false;
     }
   }
 
   /* ---------- tabs ---------- */
   function wireTabs() {
-    var tabs = document.querySelectorAll("#zsn-tabs button");
-    var panels = document.querySelectorAll("#zsn-panels .zsn-panel");
+    var tabs = document.querySelectorAll("#crisp-tabs button");
+    var panels = document.querySelectorAll("#crisp-panels .crisp-panel");
     function show(name) {
       each(tabs, function (b) {
         var on = b.getAttribute("data-tab") === name;
@@ -434,7 +434,7 @@
 
   /* ---------- go ---------- */
   function fallback() {
-    document.documentElement.className = document.documentElement.className.replace(/\s*zsn-js/, "");
+    document.documentElement.className = document.documentElement.className.replace(/\s*crisp-js/, "");
   }
 
   function init() {
@@ -446,9 +446,9 @@
     try { result = plan(out); } catch (e) { result = null; }
     if (!result) { fallback(); return; }
 
-    var po = $("p-overall"), pr = $("p-races"), pi = $("zsn-info-extra");
+    var po = $("p-overall"), pr = $("p-races"), pi = $("crisp-info-extra");
     result.overall.forEach(function (n) { po.appendChild(n); });
-    var legend = make("p", "zsn-legend",
+    var legend = make("p", "crisp-legend",
       "Net = points that count after discards. (Brackets) = discarded race. " +
       "Coloured race cells = top 3 in that race. Letters = penalty / scoring code.");
     po.appendChild(legend);
@@ -458,14 +458,14 @@
       pr.appendChild(raceCard(a, multi && a.title ? "Race results - " + a.title : "Race results"));
     });
     if (result.races.length) {
-      pr.appendChild(make("h3", "zsn-h3", "Race details"));
+      pr.appendChild(make("h3", "crisp-h3", "Race details"));
       result.races.forEach(function (n) { pr.appendChild(n); });
     }
     result.info.forEach(function (n) { pi.appendChild(n); });
     fillInfo(result.analyses);
     wireTabs();
 
-    var gen = $("zsn-generated");
+    var gen = $("crisp-generated");
     if (gen && document.lastModified) {
       var d = new Date(document.lastModified);
       if (!isNaN(d.getTime())) {
@@ -473,7 +473,7 @@
           { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
       }
     }
-    each(document.querySelectorAll(".zsn-foot-links a"), function (a) {
+    each(document.querySelectorAll(".crisp-foot-links a"), function (a) {
       if (!txt(a)) { a.parentNode.removeChild(a); }
     });
   }

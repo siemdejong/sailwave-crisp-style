@@ -12,25 +12,25 @@
 <script type="text/javascript">
 `html.javascript()`
 </script>
-<script type="text/javascript">document.documentElement.className += " zsn-js";</script>
+<script type="text/javascript">document.documentElement.className += " crisp-js";</script>
 </head>
 <body>
 <header>
 </header>
 <div id="wrap">
 
-<div class="zsn-banner">
-  <div class="zsn-banner-inner">
-    <div class="zsn-titles">
+<div class="crisp-banner">
+  <div class="crisp-banner-inner">
+    <div class="crisp-titles">
       <h1>`event.name`</h1>
-      <p class="zsn-sub">`venue.name`</p>
+      <p class="crisp-sub">`venue.name`</p>
     </div>
-    <img class="zsn-burgee" src="`venue.burgee`" alt="" onerror="this.style.display='none'">
-    <img class="zsn-burgee" src="`event.burgee`" alt="" onerror="this.style.display='none'">
+    <img class="crisp-burgee" src="`venue.burgee`" alt="" onerror="this.style.display='none'">
+    <img class="crisp-burgee" src="`event.burgee`" alt="" onerror="this.style.display='none'">
   </div>
 </div>
 
-<nav class="zsn-tabs" id="zsn-tabs" role="tablist">
+<nav class="crisp-tabs" id="crisp-tabs" role="tablist">
   <button type="button" role="tab" data-tab="overall" class="is-active">Overall</button>
   <button type="button" role="tab" data-tab="races">Races</button>
   <button type="button" role="tab" data-tab="info">Event info</button>
