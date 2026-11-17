@@ -1,0 +1,193 @@
+/* ZSN Results - Sailwave style. Pair with the ZSN-Results.htm template.
+   No backquotes in this file: Sailwave treats them as callbacks. */
+
+html { -webkit-text-size-adjust: 100%; }
+
+/* ---------- theme variables ---------- */
+body {
+  --bg: #f3f6fa; --card: #ffffff; --ink: #14213d; --muted: #5b6b82; --line: #dde4ee;
+  --head: #0b3a75; --accent: #0b66c3; --zebra: #f6f9fd; --hover: #e6f0fb;
+  --nett-bg: #e8f1fc; --disc: #8a97a8;
+  --gold: #e8a900; --silver: #8c97a4; --bronze: #d9822b;
+  --p1: #fff1b8; --p2: #e6eaf0; --p3: #fbdcbd;
+  --code-bg: #fdecea; --code-ink: #a12622;
+  --py: 9px; --px: 10px;
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 15px; line-height: 1.35; text-align: left;
+}
+body[data-theme="dark"] {
+  --bg: #0e1624; --card: #16233a; --ink: #e8eef8; --muted: #9db0cb; --line: #263a58;
+  --head: #0a2a52; --accent: #4da3ff; --zebra: #1a2a45; --hover: #213557;
+  --nett-bg: #1d3a63; --disc: #7384a0;
+  --p1: #5b4a10; --p2: #34404f; --p3: #5a3a1c;
+  --code-bg: #4a2020; --code-ink: #ffb3ad;
+}
+body[data-theme="contrast"] {
+  --bg: #ffffff; --card: #ffffff; --ink: #000000; --muted: #222222; --line: #000000;
+  --head: #000000; --accent: #0033cc; --zebra: #efefef; --hover: #dddddd;
+  --nett-bg: #d6e2ff; --disc: #555555;
+  --gold: #8a6100; --silver: #444444; --bronze: #7a3b00;
+  --p1: #ffe066; --p2: #cfcfcf; --p3: #ffb780;
+  --code-bg: #ffd6d6; --code-ink: #7a0000;
+}
+body[data-density="compact"] { --py: 3px; --px: 8px; }
+body[data-size="large"] { font-size: 19px; }
+
+[hidden] { display: none !important; }
+
+/* ---------- page frame ---------- */
+#wrap { max-width: 1200px; margin: 0 auto; padding: 0 12px 24px; }
+
+.zsn-banner {
+  margin: 0 -12px 14px; color: #fff;
+  background:
+    linear-gradient(90deg, rgba(8,40,80,.85) 0%, rgba(8,40,80,.45) 55%, rgba(8,40,80,0) 100%),
+    url("https://zeilschool.scouting.nl/images/_A7_4813.jpg#joomlaImage://local-images/_A7_4813.jpg?width=6000&height=4000") center / cover no-repeat;
+  background-color: #0b3a75;
+  min-height: 200px;
+  border-radius: 0 0 18px 18px;
+  display: flex;
+  align-items: center;
+}
+.zsn-banner-inner { display: flex; align-items: center; gap: 16px; padding: 18px 20px; max-width: 1200px; margin: 0 auto; box-sizing: border-box; width: 100% }
+.zsn-logo { width: auto; height: 56px; }
+.zsn-titles { flex: 1; min-width: 0; }
+.zsn-titles h1 { margin: 0; font-size: 1.9em; line-height: 1.1; font-weight: 700; color: #fff; }
+.zsn-sub { margin: 4px 0 0; font-size: 1.05em; opacity: .9; text-align: left; }
+.zsn-burgee { height: 64px; width: auto; flex: none; border-radius: 6px; }
+
+/* ---------- tabs ---------- */
+.zsn-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 14px; }
+.zsn-tabs button {
+  appearance: none; -webkit-appearance: none; cursor: pointer;
+  border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  font: inherit; font-weight: 600; padding: 9px 18px; border-radius: 10px;
+}
+.zsn-tabs button:hover { background: var(--hover); }
+.zsn-tabs button.is-active { background: var(--accent); border-color: var(--accent); color: #fff; }
+body[data-theme="contrast"] .zsn-tabs button { border: 2px solid #000; }
+body[data-theme="contrast"] .zsn-tabs button.is-active { background: #000; }
+
+/* without JS: show Sailwave's raw output and hide the dashboard shell */
+html:not(.zsn-js) .zsn-tabs, html:not(.zsn-js) #zsn-panels { display: none; }
+.zsn-js #swout { display: none; }
+
+/* ---------- generic content ---------- */
+.zsn-panel h1, .zsn-panel h2, .zsn-panel h3 { font-size: 1.1em; margin: 16px 0 8px; color: var(--ink); text-align: left; }
+.zsn-panel p { text-align: left; }
+.zsn-h3 { margin-top: 22px; }
+.zsn-muted { color: var(--muted); }
+
+.zsn-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; margin: 0 0 16px; overflow: hidden; }
+.zsn-card > h2 { margin: 0; padding: 12px 16px; background: var(--head); color: #fff; font-size: 1.1em; }
+.zsn-scroll { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow-x: auto; margin: 0 0 14px; }
+.zsn-card .zsn-scroll { border: 0; border-radius: 0; margin: 0; }
+
+/* ---------- tables ---------- */
+.zsn-panel table { border-collapse: separate; border-spacing: 0; border: 0; margin: 0; width: 100%; font-size: 1em; font-variant-numeric: tabular-nums; }
+.zsn-panel th, .zsn-panel td { border: 0; border-bottom: 1px solid var(--line); padding: var(--py) var(--px); vertical-align: middle; text-align: left; }
+.zsn-panel th { background: var(--head); color: #fff; font-weight: 600; font-size: .92em; white-space: nowrap; }
+.zsn-panel tbody tr { background: var(--card); }
+body:not(.no-zebra) .zsn-panel tbody tr:nth-child(even) { background: var(--zebra); }
+body .zsn-panel tbody tr:nth-child(n):hover { background: var(--hover); }
+.zsn-panel tbody tr:last-child td { border-bottom: 0; }
+.zsn-panel caption { caption-side: bottom; text-align: left; color: var(--muted); font-size: .88em; padding: 8px 12px; }
+
+/* summary table columns */
+.zsn-table th.c-rank, .zsn-table td.c-rank { width: 3.4em; min-width: 3.4em; max-width: 3.4em; text-align: center; padding-left: 6px; padding-right: 6px; }
+.zsn-table td.c-rank { font-weight: 700; }
+.zsn-table th.c-key, .zsn-table td.c-key { font-weight: 600; white-space: nowrap; }
+.zsn-table th.c-race, .zsn-table td.c-race { text-align: center; min-width: 2.5em; padding-left: 6px; padding-right: 6px; }
+.zsn-table th.c-total, .zsn-table td.c-total { text-align: center; color: var(--muted); }
+.zsn-table th.c-total { color: #fff; opacity: .85; }
+.zsn-table th.c-nett, .zsn-table td.c-nett { text-align: center; }
+.zsn-table td.c-nett { font-weight: 800; font-size: 1.05em; background: var(--nett-bg); }
+.zsn-table th.c-nett { background: var(--accent); }
+.zsn-table td.c-helm, .zsn-table td.c-sail, .zsn-table td.c-extra { white-space: nowrap; }
+
+/* sticky rank + name so they stay visible when scrolling sideways on a phone */
+.zsn-table th.c-rank, .zsn-table td.c-rank { position: sticky; left: 0; z-index: 2; }
+.zsn-table th.c-key, .zsn-table td.c-key { position: sticky; left: 3.4em; z-index: 2; }
+.zsn-table td.c-rank, .zsn-table td.c-key { background: inherit; }
+/* Net stays visible at the right edge when the table scrolls sideways */
+.zsn-table th.c-nett, .zsn-table td.c-nett { position: sticky; right: 0; z-index: 2; }
+
+/* rank badges */
+.rk { display: inline-block; min-width: 1.9em; line-height: 1.9em; border-radius: 8px; text-align: center; }
+body:not(.no-medals) .podium-1 .rk { background: var(--gold); color: #fff; }
+body:not(.no-medals) .podium-2 .rk { background: var(--silver); color: #fff; }
+body:not(.no-medals) .podium-3 .rk { background: var(--bronze); color: #fff; }
+
+/* race cells */
+body:not(.no-top3) .zsn-table td.c-race.p1 { background: var(--p1); font-weight: 700; }
+body:not(.no-top3) .zsn-table td.c-race.p2 { background: var(--p2); font-weight: 700; }
+body:not(.no-top3) .zsn-table td.c-race.p3 { background: var(--p3); font-weight: 700; }
+body:not(.no-discards) .zsn-table td.disc { color: var(--disc); font-style: italic; font-weight: 400; }
+.zsn-table td.code { background: var(--code-bg); color: var(--code-ink); font-size: .85em; }
+
+/* column toggles from the settings panel */
+body.no-races .c-race { display: none; }
+body.no-helm .c-helm:not(.c-key) { display: none; }
+body.no-sail .c-sail:not(.c-key) { display: none; }
+body.no-extra .c-extra { display: none; }
+
+/* ---------- podium strip ---------- */
+.zsn-podium { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; margin: 0 0 12px; }
+.zsn-pod { display: flex; align-items: center; gap: 10px; background: var(--card); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 12px; padding: 10px 12px; }
+.zsn-pod.p1 { border-left-color: var(--gold); }
+.zsn-pod.p2 { border-left-color: var(--silver); }
+.zsn-pod.p3 { border-left-color: var(--bronze); }
+.zsn-pod .pos { font-size: 1.5em; font-weight: 800; min-width: 1em; text-align: center; }
+.zsn-pod .who { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.zsn-pod .who strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.zsn-pod .sub { color: var(--muted); font-size: .88em; }
+.zsn-pod .pts { font-weight: 700; color: var(--accent); white-space: nowrap; }
+
+.zsn-legend { color: var(--muted); font-size: .85em; margin: 0 0 12px; }
+
+/* ---------- race results grid ---------- */
+.zsn-racegrid td.race-id { font-weight: 700; width: 4em; }
+.zsn-racegrid td.race-win { font-weight: 700; }
+
+/* ---------- key/value info ---------- */
+.zsn-kv th { background: transparent; color: var(--muted); font-weight: 500; width: 45%; white-space: normal; font-size: 1em; }
+.zsn-kv td { font-weight: 600; }
+
+/* ---------- settings ---------- */
+.zsn-set { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 16px; border-bottom: 1px solid var(--line); }
+.zsn-set-last { border-bottom: 0; }
+.zsn-set label { flex: 1; }
+.zsn-set select { font: inherit; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--ink); }
+.zsn-set input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--accent); }
+.zsn-btn { font: inherit; font-weight: 600; cursor: pointer; padding: 7px 14px; border-radius: 8px; border: 1px solid var(--accent); background: transparent; color: var(--accent); }
+.zsn-btn:hover { background: var(--accent); color: #fff; }
+
+/* ---------- footer ---------- */
+.zsn-foot { margin-top: 22px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: .88em; }
+.zsn-foot p { margin: 4px 0; text-align: left; }
+.zsn-foot a { color: var(--muted); margin-right: 14px; }
+.zsn-foot-main { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.zsn-foot-sw { font-size: .9em; }
+
+/* ---------- small screens ---------- */
+@media (max-width: 640px) {
+  .zsn-titles h1 { font-size: 1.35em; }
+  .zsn-logo { width: auto; height: 56px; }
+  .zsn-burgee { height: 40px; }
+  .zsn-banner-inner { padding: 14px 14px; gap: 10px; }
+  .zsn-tabs button { padding: 8px 12px; }
+  .zsn-set { flex-wrap: wrap; }
+  /* on a phone, give the race columns the room: helm / sail no. are hidden */
+  .zsn-table .c-helm:not(.c-key), .zsn-table .c-sail:not(.c-key) { display: none; }
+}
+
+/* ---------- print: show every tab except settings ---------- */
+@media print {
+  html, body { background: #fff; }
+  .zsn-tabs, #zsn-panels #p-settings, #zsn-panels #p-settings[hidden] { display: none !important; }
+  #zsn-panels .zsn-panel[hidden] { display: block !important; }
+  .zsn-scroll { overflow: visible; }
+  .zsn-table th.c-rank, .zsn-table td.c-rank, .zsn-table th.c-key, .zsn-table td.c-key { position: static; }
+  .zsn-banner { background-image: linear-gradient(90deg, rgba(8,40,80,.85), rgba(8,40,80,.5)), url("https://zeilschool.scouting.nl/images/_A7_4813.jpg#joomlaImage://local-images/_A7_4813.jpg?width=6000&height=4000"); }
+}

@@ -1,0 +1,486 @@
+</div><!-- end of swout: raw Sailwave output -->
+
+<div id="zsn-panels" class="zsn-panels">
+
+  <section id="p-overall" class="zsn-panel" data-panel="overall"></section>
+
+  <section id="p-races" class="zsn-panel" data-panel="races" hidden></section>
+
+  <section id="p-info" class="zsn-panel" data-panel="info" hidden>
+    <div class="zsn-card">
+      <h2>Event info</h2>
+      <table class="zsn-kv">
+        <tr><th>Event</th><td>`event.name`</td></tr>
+        <tr><th>Venue</th><td>`venue.name`</td></tr>
+        <tr><th>Races completed</th><td id="zsn-i-races">-</td></tr>
+        <tr><th>Entries</th><td id="zsn-i-entries">-</td></tr>
+        <tr><th>Discarded races</th><td id="zsn-i-discards">-</td></tr>
+        <tr id="zsn-i-caption-row" hidden><th>Series summary</th><td id="zsn-i-caption"></td></tr>
+      </table>
+    </div>
+    <div id="zsn-info-extra"></div>
+  </section>
+
+  <section id="p-settings" class="zsn-panel" data-panel="settings" hidden>
+    <div class="zsn-card">
+      <h2>Display settings</h2>
+      <div class="zsn-set"><label for="s-theme">Theme</label>
+        <select id="s-theme" data-set="theme">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+          <option value="contrast">High contrast</option>
+        </select></div>
+      <div class="zsn-set"><label for="s-density">Row spacing</label>
+        <select id="s-density" data-set="density">
+          <option value="comfortable">Comfortable</option>
+          <option value="compact">Compact</option>
+        </select></div>
+      <div class="zsn-set"><label for="s-size">Text size</label>
+        <select id="s-size" data-set="size">
+          <option value="normal">Normal</option>
+          <option value="large">Large (big screen)</option>
+        </select></div>
+      <div class="zsn-set"><label for="s-races">Show race columns</label>
+        <input id="s-races" type="checkbox" data-set="races"></div>
+      <div class="zsn-set"><label for="s-medals">Gold / silver / bronze rank badges</label>
+        <input id="s-medals" type="checkbox" data-set="medals"></div>
+      <div class="zsn-set"><label for="s-top3">Colour top 3 finishers in each race</label>
+        <input id="s-top3" type="checkbox" data-set="top3"></div>
+      <div class="zsn-set"><label for="s-discards">Grey out discarded races</label>
+        <input id="s-discards" type="checkbox" data-set="discards"></div>
+      <div class="zsn-set"><label for="s-zebra">Striped rows</label>
+        <input id="s-zebra" type="checkbox" data-set="zebra"></div>
+      <div class="zsn-set"><label for="s-helm">Show helm column</label>
+        <input id="s-helm" type="checkbox" data-set="helm"></div>
+      <div class="zsn-set"><label for="s-sail">Show sail number column</label>
+        <input id="s-sail" type="checkbox" data-set="sail"></div>
+      <div class="zsn-set"><label for="s-extra">Show extra columns (club, class, fleet ...)</label>
+        <input id="s-extra" type="checkbox" data-set="extra"></div>
+      <div class="zsn-set zsn-set-last">
+        <span class="zsn-muted">Settings are remembered in this browser only.</span>
+        <button type="button" id="zsn-reset" class="zsn-btn">Reset to defaults</button></div>
+    </div>
+  </section>
+
+</div>
+
+<div class="zsn-foot">
+  <p class="zsn-foot-links">
+    <a href="http://`venue.web`">`venue.web`</a>
+    <a href="mailto:`venue.email`">`venue.email`</a>
+    <a href="http://`event.web`">`event.web`</a>
+    <a href="mailto:`event.email`">`event.email`</a>
+  </p>
+  <p class="zsn-foot-main">
+    <span>`event.name`</span>
+    <span id="zsn-generated"></span>
+  </p>
+  <p class="zsn-foot-sw">Sailwave Scoring Software `version`<br><a href="http://www.sailwave.com">www.sailwave.com</a></p>
+</div>
+
+</div><!-- end of wrap -->
+<footer>
+</footer>
+
+<script type="text/javascript">
+(function () {
+  "use strict";
+
+  var KEY = "zsn-sailwave-settings";
+  var DEFAULTS = {
+    theme: "light", density: "compact", size: "normal",
+    races: true, medals: true, top3: true, discards: false, zebra: true,
+    helm: true, sail: true, extra: false
+  };
+  var BOOLS = ["races", "medals", "top3", "discards", "zebra", "helm", "sail", "extra"];
+  var settings = {};
+
+  function $(id) { return document.getElementById(id); }
+  function each(list, fn) { Array.prototype.forEach.call(list, fn); }
+  function txt(node) { return (node.textContent || "").replace(/\s+/g, " ").replace(/^ | $/g, ""); }
+  function make(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) { e.className = cls; }
+    if (text !== undefined && text !== null) { e.textContent = text; }
+    return e;
+  }
+
+  /* ---------- settings ---------- */
+  function loadSettings() {
+    var saved = {};
+    try { saved = JSON.parse(window.localStorage.getItem(KEY) || "{}") || {}; } catch (e) { saved = {}; }
+    for (var k in DEFAULTS) {
+      if (DEFAULTS.hasOwnProperty(k)) {
+        settings[k] = saved.hasOwnProperty(k) ? saved[k] : DEFAULTS[k];
+      }
+    }
+  }
+  function saveSettings() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(settings)); } catch (e) { /* storage blocked */ }
+  }
+  function applySettings() {
+    var b = document.body;
+    b.setAttribute("data-theme", settings.theme);
+    b.setAttribute("data-density", settings.density);
+    b.setAttribute("data-size", settings.size);
+    BOOLS.forEach(function (k) {
+      if (settings[k]) { b.classList.remove("no-" + k); } else { b.classList.add("no-" + k); }
+    });
+  }
+  function syncControls() {
+    each(document.querySelectorAll("[data-set]"), function (c) {
+      var k = c.getAttribute("data-set");
+      if (c.type === "checkbox") { c.checked = !!settings[k]; } else { c.value = settings[k]; }
+    });
+  }
+  function wireSettings() {
+    each(document.querySelectorAll("[data-set]"), function (c) {
+      c.addEventListener("change", function () {
+        var k = c.getAttribute("data-set");
+        settings[k] = (c.type === "checkbox") ? c.checked : c.value;
+        saveSettings();
+        applySettings();
+      });
+    });
+    var reset = $("zsn-reset");
+    if (reset) {
+      reset.addEventListener("click", function () {
+        for (var k in DEFAULTS) { if (DEFAULTS.hasOwnProperty(k)) { settings[k] = DEFAULTS[k]; } }
+        saveSettings();
+        applySettings();
+        syncControls();
+      });
+    }
+    syncControls();
+  }
+
+  /* ---------- reading the Sailwave tables ---------- */
+  function headerCells(table) {
+    var h = table.querySelectorAll("thead th");
+    if (h.length) { return h; }
+    var first = table.querySelector("tr");
+    return first ? first.children : [];
+  }
+  function bodyRows(table) {
+    var out = [];
+    each(table.querySelectorAll("tr"), function (tr) {
+      if (tr.parentNode && tr.parentNode.tagName === "THEAD") { return; }
+      if (tr.querySelector("td")) { out.push(tr); }
+    });
+    return out;
+  }
+  function tableKind(table) {
+    var c = " " + (table.className || "") + " ";
+    if (c.indexOf(" summarytable ") > -1) { return "summary"; }
+    if (c.indexOf(" racetable ") > -1) { return "race"; }
+    var heads = [];
+    each(headerCells(table), function (h) { heads.push(txt(h).toLowerCase()); });
+    var hasRace = table.querySelector("col.race") !== null ||
+                  heads.some(function (h) { return /^(r|race|wedstrijd)\s?\d+$/.test(h); });
+    var hasTot = table.querySelector("th.zsn-total, th.zsn-nett") !== null ||
+                 heads.some(function (h) { return /^(total|totaal|nett?|netto)$/.test(h); });
+    if (hasRace && hasTot) { return "summary"; }
+    if (heads.indexOf("place") > -1) { return "race"; }
+    return "other";
+  }
+
+  function analyse(table) {
+    var heads = headerCells(table);
+    var cols = table.querySelectorAll("col");
+    var kinds = [], raceIdx = [], raceHeads = [], i, n = 0;
+
+    /* The template tags known fields with zsn-* classes (class.set in ZSN-Results.htm).
+       Those follow the Sailwave FIELD name, so they survive a renamed column title. */
+    var CLASS_KINDS = { "zsn-rank": "rank", "zsn-boat": "boat", "zsn-sail": "sail",
+                        "zsn-helm": "helm", "zsn-total": "total", "zsn-nett": "nett" };
+    function kindFromClass(node) {
+      for (var cls in CLASS_KINDS) {
+        if (CLASS_KINDS.hasOwnProperty(cls) && node && node.classList.contains(cls)) { return CLASS_KINDS[cls]; }
+      }
+      return "";
+    }
+    var firstRow = bodyRows(table)[0];
+
+    for (i = 0; i < heads.length; i++) {
+      var t = txt(heads[i]), low = t.toLowerCase();
+      var cc = cols[i] ? String(cols[i].className || "").toLowerCase() : "";
+      var k = kindFromClass(heads[i]) || (firstRow ? kindFromClass(firstRow.children[i]) : "");
+      if (!k) {
+        k = "extra";
+        if (/^(rank|pos|place|plaats|#)/.test(low) || cc.indexOf("rank") === 0) { k = "rank"; }
+        else if (cc === "race" || /^(r|race|wedstrijd)\s?\d+$/.test(low)) { k = "race"; }
+        else if (/^(total|tot|totaal)\b/.test(low) || cc === "total") { k = "total"; }
+        else if (/^net/.test(low) || cc === "nett") { k = "nett"; }
+        else if (/boat|yacht|boot|jacht/.test(low)) { k = "boat"; }
+        else if (/sail|zeil/.test(low)) { k = "sail"; }
+        else if (/helm|skipper|schipper|stuur|^name|^naam/.test(low)) { k = "helm"; }
+      }
+      kinds.push(k);
+      if (k === "race") { raceIdx[i] = n; raceHeads.push(t); n++; }
+    }
+
+    var keyIdx = kinds.indexOf("boat");
+    if (keyIdx < 0) { keyIdx = kinds.indexOf("helm"); }
+    if (keyIdx < 0) { keyIdx = kinds.indexOf("sail"); }
+
+    function tag(node, idx) {
+      node.classList.add("c-" + kinds[idx]);
+      if (idx === keyIdx) { node.classList.add("c-key"); }
+    }
+    for (i = 0; i < heads.length; i++) { tag(heads[i], i); }
+    for (i = 0; i < cols.length && i < kinds.length; i++) { tag(cols[i], i); }
+
+    var rows = [];
+    each(bodyRows(table), function (tr) {
+      var r = { tr: tr, cells: [], rank: NaN, label: "", helm: "", sail: "", nett: "", total: "" };
+      var tds = tr.children;
+      for (var c = 0; c < tds.length && c < kinds.length; c++) {
+        var td = tds[c], kind = kinds[c], text = txt(td);
+        tag(td, c);
+        if (kind === "rank") {
+          var num = parseInt(text, 10);
+          r.rank = num;
+          if (!isNaN(num)) {
+            var span = make("span", "rk", String(num) + (text.indexOf("=") > -1 ? "=" : ""));
+            td.textContent = "";
+            td.appendChild(span);
+          }
+        } else if (kind === "race") {
+          var disc = /^\(/.test(text);
+          var code = /[A-Za-z]{2,}/.test(text);
+          var pts = parseFloat(text.replace(/[()]/g, ""));
+          if (disc) { td.classList.add("disc"); }
+          if (code) { td.classList.add("code"); }
+          r.cells[raceIdx[c]] = { td: td, text: text, pts: pts, code: code, disc: disc, place: 0 };
+        } else if (kind === "boat") { r.label = text; }
+        else if (kind === "helm") { r.helm = text; }
+        else if (kind === "sail") { r.sail = text; }
+        else if (kind === "nett") { r.nett = text; }
+        else if (kind === "total") { r.total = text; }
+      }
+      if (!r.label) { r.label = r.helm || r.sail; }
+      if (r.rank >= 1 && r.rank <= 3) { tr.classList.add("podium-" + r.rank); }
+      rows.push(r);
+    });
+
+    /* place within each race = 1 + number of boats with fewer points (low point) */
+    for (var j = 0; j < n; j++) {
+      var valid = [];
+      rows.forEach(function (r) {
+        var cell = r.cells[j];
+        if (cell && !cell.code && !isNaN(cell.pts)) { valid.push(cell); }
+      });
+      valid.forEach(function (cell) {
+        var better = 0;
+        valid.forEach(function (o) { if (o.pts < cell.pts) { better++; } });
+        cell.place = better + 1;
+        if (cell.place <= 3) { cell.td.classList.add("p" + cell.place); }
+      });
+    }
+
+    return { table: table, rows: rows, raceCount: n, raceHeads: raceHeads, title: "" };
+  }
+
+  function raceHasResults(a, j) {
+    return a.rows.some(function (r) { return r.cells[j] && r.cells[j].text !== ""; });
+  }
+
+  function podiumStrip(a) {
+    var top = a.rows.filter(function (r) { return r.rank >= 1 && r.rank <= 3; }).slice(0, 3);
+    if (!top.length) { return null; }
+    var wrap = make("div", "zsn-podium");
+    top.forEach(function (r) {
+      var card = make("div", "zsn-pod p" + r.rank);
+      card.appendChild(make("span", "pos", String(r.rank)));
+      var who = make("div", "who");
+      who.appendChild(make("strong", null, r.label));
+      if (r.helm && r.helm !== r.label) { who.appendChild(make("span", "sub", r.helm)); }
+      card.appendChild(who);
+      var pts = r.nett || r.total;
+      if (pts) { card.appendChild(make("span", "pts", pts + " pts")); }
+      wrap.appendChild(card);
+    });
+    return wrap;
+  }
+
+  function raceCard(a, title) {
+    var card = make("section", "zsn-card");
+    card.appendChild(make("h2", null, title));
+    var scroll = make("div", "zsn-scroll");
+    var t = make("table", "zsn-racegrid");
+    var thead = make("thead"), hr = make("tr");
+    ["Race", "Winner", "2nd / 3rd"].forEach(function (h) { hr.appendChild(make("th", null, h)); });
+    thead.appendChild(hr);
+    t.appendChild(thead);
+    var tb = make("tbody"), shown = 0;
+    for (var j = 0; j < a.raceCount; j++) {
+      if (!raceHasResults(a, j)) { continue; }
+      var by = { 1: [], 2: [], 3: [] };
+      a.rows.forEach(function (r) {
+        var c = r.cells[j];
+        if (c && c.place >= 1 && c.place <= 3) { by[c.place].push(r.label); }
+      });
+      var tr = make("tr");
+      tr.appendChild(make("td", "race-id", a.raceHeads[j]));
+      tr.appendChild(make("td", "race-win", by[1].join(", ") || "-"));
+      var rest = [by[2].join(", "), by[3].join(", ")].filter(function (s) { return s; }).join(" / ");
+      tr.appendChild(make("td", "race-rest", rest || "-"));
+      tb.appendChild(tr);
+      shown++;
+    }
+    if (!shown) {
+      var er = make("tr"), ec = make("td", null, "No race results yet.");
+      ec.setAttribute("colspan", "3");
+      er.appendChild(ec);
+      tb.appendChild(er);
+    }
+    t.appendChild(tb);
+    scroll.appendChild(t);
+    card.appendChild(scroll);
+    return card;
+  }
+
+  /* ---------- sort the Sailwave output into tabs ---------- */
+  function plan(out) {
+    var container = out;
+    while (container.children.length === 1 &&
+           container.firstElementChild.tagName !== "TABLE" &&
+           container.firstElementChild.querySelector("table")) {
+      container = container.firstElementChild;
+    }
+    var kids = Array.prototype.slice.call(container.children);
+    var pending = [], overall = [], races = [], info = [], analyses = [];
+
+    kids.forEach(function (node) {
+      var tbl = node.tagName === "TABLE" ? node : node.querySelector("table");
+      if (!tbl) { pending.push(node); return; }
+      var kind = tableKind(tbl);
+      if (kind === "summary") {
+        var a = analyse(tbl);
+        if (pending.length) {
+          var last = txt(pending[pending.length - 1]);
+          if (last && last.length < 80) { a.title = last; }
+        }
+        var holder = make("div", "zsn-scroll");
+        tbl.parentNode.insertBefore(holder, tbl);
+        holder.appendChild(tbl);
+        tbl.classList.add("zsn-table");
+        var pod = podiumStrip(a);
+        var nodeOut = (node === tbl) ? holder : node;
+        overall = overall.concat(pending);
+        if (pod) { overall.push(pod); }
+        overall.push(nodeOut);
+        pending = [];
+        analyses.push(a);
+      } else if (kind === "race") {
+        races = races.concat(pending, [node]);
+        pending = [];
+      } else {
+        info = info.concat(pending, [node]);
+        pending = [];
+      }
+    });
+    info = info.concat(pending);
+    if (!analyses.length) { return null; }
+    return { overall: overall, races: races, info: info, analyses: analyses };
+  }
+
+  function fillInfo(analyses) {
+    var entries = 0, sailed = 0, scheduled = 0, discards = 0, caption = "";
+    analyses.forEach(function (a, idx) {
+      entries += a.rows.length;
+      var s = 0;
+      for (var j = 0; j < a.raceCount; j++) { if (raceHasResults(a, j)) { s++; } }
+      if (s > sailed) { sailed = s; }
+      if (a.raceCount > scheduled) { scheduled = a.raceCount; }
+      a.rows.forEach(function (r) {
+        var d = 0;
+        r.cells.forEach(function (c) { if (c && c.disc) { d++; } });
+        if (d > discards) { discards = d; }
+      });
+      if (idx === 0) {
+        var cap = a.table.querySelector("caption");
+        if (cap) { caption = txt(cap); }
+      }
+    });
+    $("zsn-i-races").textContent = sailed + " / " + scheduled;
+    $("zsn-i-entries").textContent = String(entries);
+    $("zsn-i-discards").textContent = String(discards);
+    if (caption) {
+      $("zsn-i-caption").textContent = caption;
+      $("zsn-i-caption-row").hidden = false;
+    }
+  }
+
+  /* ---------- tabs ---------- */
+  function wireTabs() {
+    var tabs = document.querySelectorAll("#zsn-tabs button");
+    var panels = document.querySelectorAll("#zsn-panels .zsn-panel");
+    function show(name) {
+      each(tabs, function (b) {
+        var on = b.getAttribute("data-tab") === name;
+        if (on) { b.classList.add("is-active"); } else { b.classList.remove("is-active"); }
+        b.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      each(panels, function (p) { p.hidden = (p.getAttribute("data-panel") !== name); });
+      try { window.history.replaceState(null, "", "#" + name); } catch (e) { /* ignore */ }
+    }
+    each(tabs, function (b) {
+      b.addEventListener("click", function () { show(b.getAttribute("data-tab")); });
+    });
+    var start = (window.location.hash || "").replace("#", "");
+    if (["overall", "races", "info", "settings"].indexOf(start) > -1) { show(start); }
+  }
+
+  /* ---------- go ---------- */
+  function fallback() {
+    document.documentElement.className = document.documentElement.className.replace(/\s*zsn-js/, "");
+  }
+
+  function init() {
+    loadSettings();
+    applySettings();
+    wireSettings();
+
+    var out = $("swout"), result = null;
+    try { result = plan(out); } catch (e) { result = null; }
+    if (!result) { fallback(); return; }
+
+    var po = $("p-overall"), pr = $("p-races"), pi = $("zsn-info-extra");
+    result.overall.forEach(function (n) { po.appendChild(n); });
+    var legend = make("p", "zsn-legend",
+      "Net = points that count after discards. (Brackets) = discarded race. " +
+      "Coloured race cells = top 3 in that race. Letters = penalty / scoring code.");
+    po.appendChild(legend);
+
+    var multi = result.analyses.length > 1;
+    result.analyses.forEach(function (a) {
+      pr.appendChild(raceCard(a, multi && a.title ? "Race results - " + a.title : "Race results"));
+    });
+    if (result.races.length) {
+      pr.appendChild(make("h3", "zsn-h3", "Race details"));
+      result.races.forEach(function (n) { pr.appendChild(n); });
+    }
+    result.info.forEach(function (n) { pi.appendChild(n); });
+    fillInfo(result.analyses);
+    wireTabs();
+
+    var gen = $("zsn-generated");
+    if (gen && document.lastModified) {
+      var d = new Date(document.lastModified);
+      if (!isNaN(d.getTime())) {
+        gen.textContent = "Generated: " + d.toLocaleString("en-GB",
+          { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+      }
+    }
+    each(document.querySelectorAll(".zsn-foot-links a"), function (a) {
+      if (!txt(a)) { a.parentNode.removeChild(a); }
+    });
+  }
+
+  init();
+})();
+</script>
+<div id="scrollbottom"></div>
+</body>
+</html>
